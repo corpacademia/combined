@@ -24,7 +24,8 @@ export const ConvertToCatalogueModal: React.FC<ConvertToCatalogueModalProps> = (
   useEffect(() => {
     const fetchOrganizations = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/organization_ms/organizations');
+        const response = await axios.get(`${process.env.url}:3000/api/v1/organization_ms/organizations`
+);
         if (response.data.success) {
           setOrganizations(response.data.data);
         }
@@ -49,8 +50,10 @@ export const ConvertToCatalogueModal: React.FC<ConvertToCatalogueModalProps> = (
     setSuccess(null);
 
     try {
-      const user_profile = await axios.get('http://localhost:3000/api/v1/user_ms/user_profile');
-      const response = await axios.post('http://localhost:3000/api/v1/cloud_slice_ms/cloudSliceOrgAssignment', {
+      const user_profile = await axios.get(`${process.env.url}:3000/api/v1/user_ms/user_profile`
+);
+      const response = await axios.post(`${process.env.url}:3000/api/v1/cloud_slice_ms/cloudSliceOrgAssignment`
+, {
         sliceId,
         organizationId: organization,
         userId: user_profile.data.user.id,

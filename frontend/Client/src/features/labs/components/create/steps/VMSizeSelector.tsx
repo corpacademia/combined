@@ -74,7 +74,8 @@ export const VMSizeSelector: React.FC<VMSizeSelectorProps> = ({ onSelect }) => {
 
   useEffect(() => {
     const osList = async () => {
-      const getOs = await axios.get('http://localhost:3000/api/v1/lab_ms/getOs');
+      const getOs = await axios.get(`${process.env.url}:3000/api/v1/lab_ms/getOs`
+);
       if(getOs.data.success) {
         setOsCategories(convertToOSCategories(getOs.data.data));
         setIsprocess(true);

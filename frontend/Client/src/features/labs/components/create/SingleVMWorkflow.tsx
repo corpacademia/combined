@@ -42,7 +42,8 @@ export const SingleVMWorkflow: React.FC<SingleVMWorkflowProps> = ({ onBack }) =>
   useEffect(() => {
     const getUserDetails = async () => {  
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/user_ms/user_profile');
+        const response = await axios.get(`${process.env.url}:3000/api/v1/user_ms/user_profile`
+);
         setUser(response.data.user);
       } catch (err) {
         console.error('Error fetching user profile:', err);
@@ -137,7 +138,8 @@ export const SingleVMWorkflow: React.FC<SingleVMWorkflowProps> = ({ onBack }) =>
     const data = JSON.parse(localStorage.getItem("formData") || "{}");
       try {
         // Make API call for datacenter platform
-        const response = await axios.post('http://localhost:3000/api/v1/lab_ms/createSingleVmDatacenterLab', {
+        const response = await axios.post(`${process.env.url}:3000/api/v1/lab_ms/createSingleVmDatacenterLab`
+, {
           data:data,
           user:user.id
         });

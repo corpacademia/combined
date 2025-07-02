@@ -32,7 +32,8 @@ export const UserRoleUpgrade: React.FC<UserRoleUpgradeProps> = ({ userId, curren
 
     try {
       //update user role api endpoint
-      const update = await axios.put('http://localhost:3000/api/v1/user_ms/updateUserRole',{
+      const update = await axios.put(`${process.env.url}:3000/api/v1/user_ms/updateUserRole`
+,{
              userId:userId,
              role:newRole,
       })

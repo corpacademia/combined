@@ -12,7 +12,8 @@ export const useUserLabs = (userId: string) => {
   useEffect(() => {
     const getUserDetails = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/user_ms/user_profile', {
+        const response = await axios.get(`${process.env.url}:3000/api/v1/user_ms/user_profile`
+, {
           withCredentials: true,
         });
         setAdmin(response.data.user);
@@ -31,11 +32,13 @@ export const useUserLabs = (userId: string) => {
     const fetchLabs = async () => {
       try {
         const cataloguesResponse = await axios.post(
-          'http://localhost:3000/api/v1/lab_ms/getLabsConfigured',
+          `${process.env.url}:3000/api/v1/lab_ms/getLabsConfigured`
+,
           { admin_id: admin.id }
         );
         const labsResponse = await axios.post(
-          'http://localhost:3000/api/v1/lab_ms/getAssignedLabs',
+          `${process.env.url}:3000/api/v1/lab_ms/getAssignedLabs`
+,
           { userId }
         );
         const cats = cataloguesResponse.data.data;

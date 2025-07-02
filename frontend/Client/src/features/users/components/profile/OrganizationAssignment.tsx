@@ -36,7 +36,8 @@ export const OrganizationAssignment: React.FC<OrganizationAssignmentProps> = ({
     // Fetch organizations from API
     const fetchOrganizations = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/organization_ms/organizations');
+        const response = await axios.get(`${process.env.url}:3000/api/v1/organization_ms/organizations`
+);
         setAvailableOrganizations(response.data.data);
         
       } catch (err) {
@@ -63,7 +64,8 @@ export const OrganizationAssignment: React.FC<OrganizationAssignmentProps> = ({
     try {
       // TODO: Implement API call
       // await new Promise(resolve => setTimeout(resolve, 1000));
-      const update_user_field = await axios.put('http://localhost:3000/api/v1/user_ms/updateUserOrganization',{
+      const update_user_field = await axios.put(`${process.env.url}:3000/api/v1/user_ms/updateUserOrganization`
+,{
         userId:userId,
         values:selectedOrg,
       })

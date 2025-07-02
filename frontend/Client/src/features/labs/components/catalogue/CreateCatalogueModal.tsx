@@ -44,7 +44,8 @@ export const CreateCatalogueModal: React.FC<CreateCatalogueModalProps> = ({
 
   useEffect(() => {
     const getUserDetails = async () => {
-      const response = await axios.get('http://localhost:3000/api/v1/user_ms/user_profile');
+      const response = await axios.get(`${process.env.url}:3000/api/v1/user_ms/user_profile`
+);
       setAdmin(response.data.user);
     };
     getUserDetails();
@@ -67,7 +68,8 @@ export const CreateCatalogueModal: React.FC<CreateCatalogueModalProps> = ({
 
     setIsFetchingInstances(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/lab_ms/getInstances', {
+      const response = await axios.post(`${process.env.url}:3000/api/v1/lab_ms/getInstances`
+, {
         cloud: 'aws',
         cpu: formData.cpu,
         ram: formData.ram,
@@ -111,7 +113,8 @@ export const CreateCatalogueModal: React.FC<CreateCatalogueModalProps> = ({
     setSuccess(null);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/lab_ms/createCatalogue', {
+      const response = await axios.post(`${process.env.url}:3000/api/v1/lab_ms/createCatalogue`
+, {
         name: formData.name,
         cpu: formData.cpu,
         ram: formData.ram,
@@ -129,7 +132,8 @@ export const CreateCatalogueModal: React.FC<CreateCatalogueModalProps> = ({
       
       if (response.data.success) {
 
-        const createNewInstance = await axios.post('http://localhost:3000/api/v1/aws_ms/createNewInstance',{
+        const createNewInstance = await axios.post(`${process.env.url}:3000/api/v1/aws_ms/createNewInstance`
+,{
           instance_type:formData.instance,
           ami_id:existingCatalogue.ami,
           storage_size:formData.storage,
@@ -145,10 +149,12 @@ export const CreateCatalogueModal: React.FC<CreateCatalogueModalProps> = ({
             handleClose();
           }, 1500);
 
-        //   const instancedetails = await axios.post('http://localhost:3000/api/v1/awsCreateInstanceDetails',{
+        //   const instancedetails = await axios.post(`${process.env.url}:3000/api/v1/awsCreateInstanceDetails`
+,{
         //   lab_id:response.data.output.lab_id
         // })
-        // const decrypt_password = await axios.post("http://localhost:3000/api/v1/decryptPassword",{
+        // const decrypt_password = await axios.post(`${process.env.url}:3000/api/v1/decryptPassword`
+,{
         //   lab_id:response.data.output.lab_id,
         //   public_ip:instancedetails.data.result.public_ip,
         //   instance_id:instancedetails.data.result.instance_id,

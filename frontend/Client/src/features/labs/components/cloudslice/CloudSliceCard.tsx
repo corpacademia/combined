@@ -85,7 +85,8 @@ export const CloudSliceCard: React.FC<CloudSliceCardProps> = ({
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/user_ms/user_profile');
+        const response = await axios.get(`${process.env.url}:3000/api/v1/user_ms/user_profile`
+);
         setUser(response.data.user);
       } catch (error) {
         console.error('Failed to fetch user profile:', error);
@@ -124,7 +125,8 @@ export const CloudSliceCard: React.FC<CloudSliceCardProps> = ({
     
         // If not launched, create IAM user and update lab status
         if (slice.modules === 'without-modules') {
-          const createIamAccount = await axios.post('http://localhost:3000/api/v1/aws_ms/createIamUser', {
+          const createIamAccount = await axios.post(`${process.env.url}:3000/api/v1/aws_ms/createIamUser`
+, {
             userName: user.name,
             services: slice.services,
             role:user.role,
@@ -135,7 +137,8 @@ export const CloudSliceCard: React.FC<CloudSliceCardProps> = ({
             throw new Error(createIamAccount.data.message || 'Failed to create IAM user');
           }
     
-          const updateLabStatus = await axios.post('http://localhost:3000/api/v1/cloud_slice_ms/updateLabStatus', {
+          const updateLabStatus = await axios.post(`${process.env.url}:3000/api/v1/cloud_slice_ms/updateLabStatus`
+, {
             labId: slice.labid,
             createdBy: slice.createdby,
             status: 'active',
@@ -148,7 +151,8 @@ export const CloudSliceCard: React.FC<CloudSliceCardProps> = ({
     
           window.location.href = `/dashboard/labs/cloud-slices/${slice.labid}/lab`;
         } else {
-          const updateLabStatus = await axios.post('http://localhost:3000/api/v1/cloud_slice_ms/updateLabStatus', {
+          const updateLabStatus = await axios.post(`${process.env.url}:3000/api/v1/cloud_slice_ms/updateLabStatus`
+, {
             labId: slice.labid,
             createdBy: slice.createdby,
             status: 'active',
@@ -194,7 +198,8 @@ export const CloudSliceCard: React.FC<CloudSliceCardProps> = ({
     
         // If not launched, create IAM user and update lab status
         if (slice.modules === 'without-modules') {
-          const createIamAccount = await axios.post('http://localhost:3000/api/v1/aws_ms/createIamUser', {
+          const createIamAccount = await axios.post(`${process.env.url}:3000/api/v1/aws_ms/createIamUser`
+, {
             userName: user.name,
             services: slice.services,
             role:user.role,
@@ -206,7 +211,8 @@ export const CloudSliceCard: React.FC<CloudSliceCardProps> = ({
             throw new Error(createIamAccount.data.message || 'Failed to create IAM user');
           }
     
-          const updateLabStatus = await axios.post('http://localhost:3000/api/v1/cloud_slice_ms/updateLabStatusOfOrg', {
+          const updateLabStatus = await axios.post(`${process.env.url}:3000/api/v1/cloud_slice_ms/updateLabStatusOfOrg`
+, {
             labId: slice.labid,
             orgId:getOrgLabStatus(slice.labid).orgid,
             status: 'active',
@@ -219,7 +225,8 @@ export const CloudSliceCard: React.FC<CloudSliceCardProps> = ({
     
           window.location.href = `/dashboard/labs/cloud-slices/${slice.labid}/lab`;
         } else {
-          const updateLabStatus = await axios.post('http://localhost:3000/api/v1/cloud_slice_ms/updateLabStatusOfOrg', {
+          const updateLabStatus = await axios.post(`${process.env.url}:3000/api/v1/cloud_slice_ms/updateLabStatusOfOrg`
+, {
             labId: slice.labid,
             orgId:getOrgLabStatus(slice.labid).orgid,
             status: 'active',
@@ -304,7 +311,8 @@ export const CloudSliceCard: React.FC<CloudSliceCardProps> = ({
       const creds = orgStatus.find((cred: any) => cred.labid === slice.labid);
       if (isOrgAdminNotCreator) {
         if(creds?.username != null) {
-        const deleteIam = await axios.post('http://localhost:3000/api/v1/aws_ms/deleteIamAccount',{
+        const deleteIam = await axios.post(`${process.env.url}:3000/api/v1/aws_ms/deleteIamAccount`
+,{
           userName:creds?.username
         })
       }

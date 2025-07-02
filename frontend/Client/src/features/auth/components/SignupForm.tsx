@@ -17,7 +17,8 @@ export const SignupForm: React.FC = () => {
     // Fetch organizations when component mounts
     const fetchOrganizations = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/organization_ms/organizations');
+        const response = await axios.get(`${process.env.url}:3000/api/v1/organization_ms/organizations`
+);
         if (response.data.success) {
           setOrganizations(response.data.data);
         }
@@ -52,7 +53,8 @@ export const SignupForm: React.FC = () => {
     // Refresh the organizations list after adding a new one
     const fetchOrganizations = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/organization_ms/organizations');
+        const response = await axios.get(`${process.env.url}:3000/api/v1/organization_ms/organizations`
+);
         if (response.data.success) {
           setOrganizations(response.data.data);
           // Select the most recently added organization (last in the list)

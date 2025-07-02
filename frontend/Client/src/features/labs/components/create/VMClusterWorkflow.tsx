@@ -40,7 +40,8 @@ export const VMClusterWorkflow: React.FC<VMClusterWorkflowProps> = ({ onBack }) 
   useEffect(() => {
     const getUserDetails = async () => {  
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/user_ms/user_profile');
+        const response = await axios.get(`${process.env.url}:3000/api/v1/user_ms/user_profile`
+);
         setUser(response.data.user);
       } catch (err) {
         console.error('Error fetching user profile:', err);
@@ -135,7 +136,8 @@ export const VMClusterWorkflow: React.FC<VMClusterWorkflowProps> = ({ onBack }) 
       const data = JSON.parse(localStorage.getItem("formData") || "{}");
       try {
         // Make API call for datacenter platform
-        const response = await axios.post('http://localhost:3000/api/v1/vmcluster_ms/createVMClusterDatacenterLab', {
+        const response = await axios.post(`${process.env.url}:3000/api/v1/vmcluster_ms/createVMClusterDatacenterLab`
+, {
           data: data,
           userId: user.id
         });

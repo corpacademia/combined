@@ -38,7 +38,8 @@ export const EditUserModal: React.FC<EditUserModalProps> = ({
   useEffect(() => {
     const fetchOrganizations = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/organization_ms/organizations');
+        const response = await axios.get(`${process.env.url}:3000/api/v1/organization_ms/organizations`
+);
         if (response.data.success) {
           setOrganizations(response.data.data);
         }

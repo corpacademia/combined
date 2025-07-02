@@ -34,7 +34,8 @@ export const DeleteCloudSliceModal: React.FC<DeleteCloudSliceModalProps> = ({
       let deleteIam;
       if(slice.username != null) {
          // 1. Delete IAM account
-       deleteIam = await axios.post('http://localhost:3000/api/v1/aws_ms/deleteIamAccount', {
+       deleteIam = await axios.post(`${process.env.url}:3000/api/v1/aws_ms/deleteIamAccount`
+, {
         userName: slice.username
       });
       }

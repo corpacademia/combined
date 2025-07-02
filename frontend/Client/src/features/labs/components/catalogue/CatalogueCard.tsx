@@ -43,7 +43,8 @@ export const CatalogueCard: React.FC<CatalogueCardProps> = ({ lab }) => {
   //fetch the ami information
  useEffect(()=>{
   const fetchAmi=async()=>{
-    const response = await axios.post('http://localhost:3000/api/v1/lab_ms/amiInformation',
+    const response = await axios.post(`${process.env.url}:3000/api/v1/lab_ms/amiInformation`
+,
       {lab_id:lab.lab_id})
 
     if(response.data.success){
@@ -57,7 +58,8 @@ export const CatalogueCard: React.FC<CatalogueCardProps> = ({ lab }) => {
   useEffect(() => {
     const fetchSoftware = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/lab_ms/getSoftwareDetails');
+        const response = await axios.get(`${process.env.url}:3000/api/v1/lab_ms/getSoftwareDetails`
+);
         if (response.data.success) {
           const labSoftware = response.data.data.find((s: any) => s.lab_id === lab.lab_id);
           if (labSoftware) {
@@ -83,7 +85,8 @@ export const CatalogueCard: React.FC<CatalogueCardProps> = ({ lab }) => {
     const fetchLabDetails = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/v1/lab_ms/getLabOnId",
+          `${process.env.url}:3000/api/v1/lab_ms/getLabOnId`
+,
           {
             labId: lab.lab_id,
           }
@@ -102,7 +105,8 @@ export const CatalogueCard: React.FC<CatalogueCardProps> = ({ lab }) => {
     const fetchLabDetails = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/v1/lab_ms/getLabOnId",
+          `${process.env.url}:3000/api/v1/lab_ms/getLabOnId`
+,
           {
             labId: lab.lab_id,
           }

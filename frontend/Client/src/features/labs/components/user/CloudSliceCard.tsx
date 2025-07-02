@@ -79,7 +79,8 @@ export const CloudSliceCard: React.FC<CloudSliceCardProps> = ({ lab, onDelete, l
       if (lab.modules === 'without-modules') {
         // Call createIamUser only if the lab is not already launched
         if (!selectedLab.launched) {
-          const createIamUser = await axios.post('http://localhost:3000/api/v1/aws_ms/createIamUser', {
+          const createIamUser = await axios.post(`${process.env.url}:3000/api/v1/aws_ms/createIamUser`
+, {
             userName: user.name,
             services: lab.services,
             role:user.role,
@@ -88,7 +89,8 @@ export const CloudSliceCard: React.FC<CloudSliceCardProps> = ({ lab, onDelete, l
           });
 
           if(createIamUser.data.success){
-            const updateUserLabStatus = await axios.post('http://localhost:3000/api/v1/cloud_slice_ms/updateLabStatusOfUser',{
+            const updateUserLabStatus = await axios.post(`${process.env.url}:3000/api/v1/cloud_slice_ms/updateLabStatusOfUser`
+,{
               status:'active',
               launched:true,
               labId:lab.labid,
@@ -132,7 +134,8 @@ export const CloudSliceCard: React.FC<CloudSliceCardProps> = ({ lab, onDelete, l
        
       } else {
         if(!selectedLab.launched){
-          const updateUserLabStatus = await axios.post('http://localhost:3000/api/v1/cloud_slice_ms/updateLabStatusOfUser',{
+          const updateUserLabStatus = await axios.post(`${process.env.url}:3000/api/v1/cloud_slice_ms/updateLabStatusOfUser`
+,{
             status:'active',
             launched:true,
             labId:lab.labid,

@@ -43,7 +43,8 @@ export const OrganizationList: React.FC<OrganizationListProps> = ({
     setSuccess(null);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/organization_ms/deleteOrganizations', {
+      const response = await axios.post(`${process.env.url}:3000/api/v1/organization_ms/deleteOrganizations`
+, {
         orgIds
       });
 
